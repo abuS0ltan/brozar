@@ -1,0 +1,11 @@
+.auth .card{
+    border: none;
+}
+.auth .btn.sub-btn{
+    background-color: var(--mainColor);
+    color: white;
+    border-radius: 3.5rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    padding: .6rem 0rem;
+}

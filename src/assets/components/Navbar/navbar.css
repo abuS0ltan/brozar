@@ -1,0 +1,41 @@
+.navbar{
+    background-color: #F5F7FA;
+}
+.navbar .nav-item .nav-link{
+    color: #18191F;
+    font-weight: 600;
+} 
+.nav-item .loginBtn{
+    color: var(--mainColor);
+    font-weight: 600;
+}
+.nav-item .registerBtn{
+    color: white;
+    font-weight: 600;
+    background-color: var(--mainColor);
+    border-radius: .35rem;
+}
+.nav-item .registerBtn:hover{
+    color: var(--mainColor);
+    border: 1px solid var(--mainColor);
+}
+.navbar .nav-item{
+    text-align: center;
+}
+
+.navbar .dropdown-toggle{
+    padding: 0;
+    width: 100%;
+}
+.navbar .dropdown-toggle::after{
+    display: none;
+}
+.navbar .dropdown-toggle img{
+    width: 40px;
+}
+.navbar .dropdown .dropdown-menu{
+    left: 50%; /* Position it in the middle horizontally */
+    top: 100%; /* Position it directly below the dropdown button */
+    transform: translateX(-50%); /* Center it by adjusting its own width */
+    z-index: 1000; /* Optional: Ensure it appears on top of other elements */
+}

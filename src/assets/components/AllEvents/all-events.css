@@ -1,36 +1,60 @@
-.home .header{
-    background-color: var(--mainBackgroundColor);
-    height: 100vh;
-    min-height: 100%;
+.all-events-container {
+    min-height: 100vh;
+    background: linear-gradient(rgba(255, 255, 255, 0.795), rgba(255, 255, 255, 0.795)), 
+    url('../../../../public/bg_pattern.png');
 }
-
-.home .header .col-md-6{
-    height: 100vh;
-    min-height: 100%;
+.hero-section{
+    background-color: #f8f9fa;
 }
-.home .main-title{
-    color: var(--color2);
-}
-.home .main-title span{
+.hero-section .title {
     color: var(--mainColor);
 }
-.home .more{
-    background-color: var(--mainColor);
-    color: white;
-    border-radius: .35rem;
-    font-weight: 600;
-    text-decoration: none;
-    padding: 1rem 2rem;
+
+.hero-section .subtitle {
+    max-width: 800px;
+    margin: 0 auto;
 }
-.about{
-    background: linear-gradient(rgba(255, 255, 255, 0.795), rgba(255, 255, 255, 0.795)), 
-                url('../../../../public/bg_pattern.png');
+
+.search-bar .search-input {
+    max-width: 600px;
+    width: 100%;
 }
-.about .sub-title{
-    color: var(--color2);
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.219);
+
+.search-bar .search-input .form-control {
+    border-radius: 25px;
+    padding-left: 1.5rem;
+    border: 1px solid #ddd;
 }
-.home .about .card{
+
+.search-bar .search-button {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    border-radius: 20px;
+}
+
+.project-card {
+    transition: transform 0.2s;
+    cursor: pointer;
     border: 0;
-    box-shadow: 0px 8px 7px #e0e1e2;
+    border-radius: 0px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #F7F7F7;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+}
+
+.project-image {
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+.details-button {
+    color: var(--mainColor);
+    text-decoration: none;
+    font-weight: 700;    
 }

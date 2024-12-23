@@ -19,12 +19,13 @@ import OwnerProfile from './assets/components/OwnerProfile/OwnerProfile.jsx';
 import ProtectedRoute from './assets/components/ProtectedRoute/ProtectedRoute.jsx';
 import PublicRoute from './assets/components/PublicRoute/PublicRoute.jsx';
 import UserProfile from './assets/components/UserProfile/UserProfile.jsx';
+import ForgotPassword from './assets/components/Auth/ForgetPassword.jsx';
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <>
+    <div className='app'>
       <Navbar/>
 
         <Routes>
@@ -32,6 +33,7 @@ function App() {
           <Route path="/" element={<Home/>} />
           <Route path='/register' element={<PublicRoute><Register/></PublicRoute>}/>
           <Route path='/login' element={<PublicRoute><Login/></PublicRoute>}/>
+          <Route path='/forgotpassword' element={<PublicRoute><ForgotPassword/></PublicRoute>}/>
           <Route path='/allprojects' element={<ProtectedRoute><AllProjects/></ProtectedRoute>}/>
           <Route path='/allevents' element={<ProtectedRoute><AllEvents/></ProtectedRoute>}/>
           <Route path='/project/:id' element={<ProtectedRoute><Project/></ProtectedRoute>}/>
@@ -43,7 +45,7 @@ function App() {
 
         </Routes>
       <Fotter/>
-    </>
+    </div>
   )
 }
 

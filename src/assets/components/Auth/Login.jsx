@@ -171,7 +171,7 @@ export default function Login() {
 
                 <div className="d-flex justify-content-between mt-4">
                   <a href="/help" className="text-decoration-none">Other issue with sign in</a>
-                  <a href="/forgot-password" className="text-decoration-none">Forget your password</a>
+                  <a href="/forgotpassword" className="text-decoration-none">Forget your password</a>
                 </div>
               </form>
             </div>

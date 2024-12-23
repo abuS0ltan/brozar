@@ -1,6 +1,7 @@
 import React from "react";
 import './navbar.css';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from "axios";
 function Navbar() {
     const navigate = useNavigate();
 
@@ -9,6 +10,12 @@ function Navbar() {
         return !!token; // Returns true if token exists
     };
     const handleLogout = () => {
+        try{
+            axios.get(`${import.meta.env.VITE_API_URL}/auth/logout`, null, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }) // Replace with your API endpoint and logic to logout
+        }catch(err){
+            alert(err.message);
+            return;
+        }
         localStorage.removeItem('token'); // Clear the token
         navigate('/login'); // Redirect to login after logout
       };

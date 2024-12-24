@@ -8,20 +8,21 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './auth.css'
 
 const schema = Joi.object({
-  email: Joi.string().email({ tlds: false }).required().messages({
-    'string.email': 'Please enter a valid email',
-    'string.empty': 'Email is required'
+  code: Joi.string().length(6).required().messages({
+    'string.length': 'Code must be exactly 6 digits',
+    'string.empty': 'Code is required'
   })
 })
 
-export default function ForgotPassword() {
+export default function EnterCode() {
   const apiUrl = import.meta.env.VITE_API_URL;
+  const email = localStorage.getItem('forgotPasswordEmail');
   const navigate = useNavigate()
   const [errors, setErrors] = useState({})
   const [formError, setFormError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState({
-    email: ''
+    code: ''
   })
 
   const validateForm = () => {
@@ -45,17 +46,17 @@ export default function ForgotPassword() {
     if (validateForm()) {
       setIsLoading(true)
       try {
-        const response = await axios.post(apiUrl + '/auth/forgot-password', { email: formData.email })
+        
+        const response = await axios.post(apiUrl + '/auth/reset-password/verify-code', { email, code: formData.code })
+        // Save code to localStorage
+        localStorage.setItem('verificationCode', formData.code)
 
-        // Save email to localStorage
-        localStorage.setItem('forgotPasswordEmail', formData.email)
-
-        // Navigate to the enter code page
-        navigate('/entercode')
+        // Navigate to the enter new password page
+        navigate('/restpassword')
       } catch (error) {
         console.error('Request failed:', error)
         if (error.response?.status === 400) {
-          setFormError('Invalid email address or user not found')
+          setFormError('Invalid or expired code')
         } else if (error.response?.data?.message) {
           setFormError(error.response.data.message)
         } else {
@@ -83,8 +84,8 @@ export default function ForgotPassword() {
         <div className="col-md-6 col-lg-5">
           <div className="card border-0 shadow-sm rounded-4">
             <div className="card-body p-4">
-              <h2 className="text-center mb-4">Forgot Password</h2>
-              <p className='text-secondary mb-2 text-center'>No worries! Enter your email address below and we will send you a code to reset password.</p>
+              <h2 className="text-center mb-4">Enter Verification Code</h2>
+              <p className='text-secondary text-center'>Code has been send to <span className='text-dark fw-bold'>{email}</span>. Enter the code to verify your account.</p>
               {formError && (
                 <div className="alert alert-danger" role="alert">
                   {formError}
@@ -93,15 +94,16 @@ export default function ForgotPassword() {
 
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
-                  <label className="form-label">Email Address</label>
+                  <label className="form-label">Verification Code</label>
                   <input
-                    type="email"
-                    className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-                    name="email"
-                    value={formData.email}
+                    type="text"
+                    className={`form-control ${errors.code ? 'is-invalid' : ''}`}
+                    name="code"
+                    value={formData.code}
                     onChange={handleChange}
+                    placeholder='6 digit code'
                   />
-                  {errors.email && <div className="invalid-feedback">{errors.email}</div>}
+                  {errors.code && <div className="invalid-feedback">{errors.code}</div>}
                 </div>
 
                 <button
@@ -109,20 +111,17 @@ export default function ForgotPassword() {
                   className="btn sub-btn w-100 py-2 mt-3"
                   disabled={isLoading}
                 >
-                  {isLoading ? 'Sending...' : 'Send Reset Code'}
+                  {isLoading ? 'Verifying...' : 'Verify Code'}
                 </button>
-
-                
 
                 <div className="d-flex justify-content-between mt-4">
                   <a href="/help" className="text-decoration-none">Need help?</a>
-                  <a href="/login" className="text-decoration-none">Back to Login</a>
+                  <a href="/login" className="text-decoration-none">Back to login?</a>
                 </div>
               </form>
             </div>
           </div>
 
-         
         </div>
       </div>
     </div>

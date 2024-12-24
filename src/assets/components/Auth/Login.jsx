@@ -131,17 +131,7 @@ export default function Login() {
                 <div className="mb-3">
                   <div className="d-flex justify-content-between align-items-center">
                     <label className="form-label">Your password</label>
-                    <button
-                      type="button"
-                      className="btn btn-link p-0 text-decoration-none"
-                      onClick={() => setShowPassword(!showPassword)}
-                    >
-                      {showPassword ? (
-                        <span className="text-muted">Hide</span>
-                      ) : (
-                        <span className="text-muted">Show</span>
-                      )}
-                    </button>
+                    
                   </div>
                   <div className="input-group">
                     <input
@@ -151,6 +141,13 @@ export default function Login() {
                       value={formData.password}
                       onChange={handleChange}
                     />
+                    <button
+                                        className="btn btn-outline-secondary"
+                                        type="button"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                      >
+                                        {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                                      </button>
                     {errors.password && <div className="invalid-feedback">{errors.password}</div>}
                   </div>
                 </div>
@@ -177,7 +174,7 @@ export default function Login() {
             </div>
           </div>
 
-          <div className="text-center mt-5">
+          <div className="text-center mt-2">
             <p className="text-muted mb-3">New to our community</p>
             <a
               href="/register"

@@ -20,30 +20,36 @@ import ProtectedRoute from './assets/components/ProtectedRoute/ProtectedRoute.js
 import PublicRoute from './assets/components/PublicRoute/PublicRoute.jsx';
 import UserProfile from './assets/components/UserProfile/UserProfile.jsx';
 import ForgotPassword from './assets/components/Auth/ForgetPassword.jsx';
+import EnterCode from './assets/components/Auth/EnterCode.jsx';
+import EnterNewPassword from './assets/components/Auth/EnterNewPassword.jsx';
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div className='app'>
+    <div className='main-app'>
       <Navbar/>
+        <div className="app">
 
-        <Routes>
+          <Routes>
 
-          <Route path="/" element={<Home/>} />
-          <Route path='/register' element={<PublicRoute><Register/></PublicRoute>}/>
-          <Route path='/login' element={<PublicRoute><Login/></PublicRoute>}/>
-          <Route path='/forgotpassword' element={<PublicRoute><ForgotPassword/></PublicRoute>}/>
-          <Route path='/allprojects' element={<ProtectedRoute><AllProjects/></ProtectedRoute>}/>
-          <Route path='/allevents' element={<ProtectedRoute><AllEvents/></ProtectedRoute>}/>
-          <Route path='/project/:id' element={<ProtectedRoute><Project/></ProtectedRoute>}/>
-          <Route path='/event/:id' element={<ProtectedRoute><Event/></ProtectedRoute>}/>
-          <Route path='/owner/:id' element={<ProtectedRoute><OwnerProfile/></ProtectedRoute>}/>
-          <Route path='/profile' element={<ProtectedRoute><UserProfile/></ProtectedRoute>}/>
+            <Route path="/" element={<Home/>} />
+            <Route path='/register' element={<PublicRoute><Register/></PublicRoute>}/>
+            <Route path='/login' element={<PublicRoute><Login/></PublicRoute>}/>
+            <Route path='/forgotpassword' element={<PublicRoute><ForgotPassword/></PublicRoute>}/>
+            <Route path='/entercode' element={<PublicRoute><EnterCode/></PublicRoute>}/>
+            <Route path='/restpassword' element={<PublicRoute><EnterNewPassword/></PublicRoute>}/>
+            <Route path='/allprojects' element={<ProtectedRoute><AllProjects/></ProtectedRoute>}/>
+            <Route path='/allevents' element={<ProtectedRoute><AllEvents/></ProtectedRoute>}/>
+            <Route path='/project/:id' element={<ProtectedRoute><Project/></ProtectedRoute>}/>
+            <Route path='/event/:id' element={<ProtectedRoute><Event/></ProtectedRoute>}/>
+            <Route path='/owner/:id' element={<ProtectedRoute><OwnerProfile/></ProtectedRoute>}/>
+            <Route path='/profile' element={<ProtectedRoute><UserProfile/></ProtectedRoute>}/>
 
-          
+            
 
-        </Routes>
+          </Routes>
+        </div>
       <Fotter/>
     </div>
   )

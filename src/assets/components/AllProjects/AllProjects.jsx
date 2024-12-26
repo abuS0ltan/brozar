@@ -111,7 +111,6 @@ function AllProjects() {
                   />
                   <div className="card-body text-center">
                     <h5 className="card-title mb-2">{project.name}</h5>
-                    <p className="card-text text-muted mb-3">{project.shortInfo}</p>
                     <Link 
                       to={`/project/${project.id}`}
                       className="btn btn-success px-4"

@@ -34,10 +34,9 @@ function AllEvents() {
     return (
         <div className="all-events-container">
             <div className="hero-section text-center py-5">
-                <h1 className="display-2 mb-3 title">Project</h1>
+                <h1 className="display-2 mb-3 title">Event</h1>
                 <p className="lead text-muted mb-5 px-3 subtitle">
-                    Discover and support innovative Palestinian projects. Search for businesses,
-                    connect with entrepreneurs, and invest in local talent.
+                Discover and support innovative Palestinian events. Explore exciting gatherings, connect with organizers, and participate in local experiences.
                 </p>
                 <div className="search-bar d-flex justify-content-center mb-5">
                     <div className="search-input position-relative">

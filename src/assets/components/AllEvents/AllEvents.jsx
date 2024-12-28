@@ -16,7 +16,7 @@ function AllEvents() {
     const fetchProjects = async () => {
         try {
             setLoading(true);
-            const response = await axios.get(`${import.meta.env.VITE_API_URL}/events`, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } });
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/events`);
             setProjects(response.data);
             setError(null);
         } catch (err) {

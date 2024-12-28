@@ -35,3 +35,31 @@
     border: 0;
     box-shadow: 0px 8px 7px #e0e1e2;
 }
+
+.home .event{
+    background-image: url('../../../../public/eventBack.png');
+    background-size: cover;
+    background-position: 0rem 0rem;
+    padding: 3rem 1rem;
+}
+.home h2.event-title{
+    color: #E6E6E6;
+    text-align: center;
+    font-weight: bold;
+    text-shadow: 0px 5px 5px rgba(0,0,0,.25);
+    margin-bottom: 2rem;
+}
+.event .more-btn{
+    background-color: white;
+    color: #4D4D4D;
+    text-decoration: none;
+    width: fit-content;
+    padding: 1rem 1.5rem;
+    font-weight: 700;
+    margin: auto;
+    margin-top: 2rem;
+    border-radius: .35rem;
+}
+.event .more-btn:hover{
+    background-color: rgba(255, 255, 255, 0.884);
+}

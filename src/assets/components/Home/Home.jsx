@@ -1,6 +1,31 @@
 import React from 'react'
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 import './home.css'
 function Home() {
+    const [projects, setProjects] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        fetchProjects();
+    }, []);
+
+    const fetchProjects = async () => {
+        try {
+            setLoading(true);
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/events`);
+            setProjects(response.data);
+            setError(null);
+        } catch (err) {
+            setError('Failed to fetch projects. Please try again later.');
+            console.error('Error fetching projects:', err);
+        } finally {
+            setLoading(false);
+        }
+    };
     return (
         <div className='home'>
             <div className="header">
@@ -74,7 +99,7 @@ function Home() {
                                 </svg>
 
                                 <h3 className='service'>
-                                Virtual Marketplaces
+                                    Virtual Marketplaces
                                 </h3>
                                 <p className='info'>Showcase your products online and reach a wider audience.</p>
                             </div>
@@ -89,7 +114,7 @@ function Home() {
                                 </svg>
 
                                 <h3 className='service'>
-                                Entrepreneurial Networking
+                                    Entrepreneurial Networking
                                 </h3>
                                 <p className='info'>Share knowledge with fellow entrepreneurs to boost efficiency.</p>
                             </div>
@@ -98,7 +123,37 @@ function Home() {
                 </div>
 
             </div>
+            <div className="event">
 
+                <div className="container">
+                    <h2 className='event-title'>Our Latest Project </h2>
+                    <div className="row ">
+                        {projects.map(project => (
+                            <div key={project.id} className="col-12 col-md-6 col-lg-3">
+                                <div className="card project-card">
+                                    <img
+                                        src={project.images && project.images.length > 0 ? project.images[0].imageUrl : '/path/to/default-image.jpg'}
+                                        className="card-img-top project-image"
+                                        alt={project.name}
+                                    />
+                                    <div className="card-body text-start">
+                                        <h5 className="card-title mb-2">{project.name}</h5>
+                                        <p className="card-text text-muted mb-1">{project.startDate}</p>
+
+                                        <p className="card-text text-muted mb-1">{project.city}</p>
+                                        <Link to={`/event/${project.id}`} className=" details-button">
+                                            Show more &rarr;
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                        <Link to={`/allevents`} className=" more-btn">
+                            Show more
+                        </Link>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }

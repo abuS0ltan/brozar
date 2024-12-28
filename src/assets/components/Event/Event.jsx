@@ -140,7 +140,9 @@ export default function Event() {
             </div>
 
             <div className="date-time mb-4">
-              <h5>{formatDate(event.startDate)}</h5>
+              <h5 className='d-inline-block'>{formatDate(event.startDate)}&nbsp;-</h5>
+              <h5 className='d-inline-block'>&nbsp; {formatDate(event.endDate)}</h5>
+
               <p className="text-success mb-0">
                 {formatTime(event.startDate)} - {formatTime(event.endDate)}
               </p>

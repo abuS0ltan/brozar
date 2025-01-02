@@ -147,7 +147,11 @@ export default function Event() {
                 {formatTime(event.startDate)} - {formatTime(event.endDate)}
               </p>
             </div>
-
+            <div className="event-status my-3">
+              <span className={`status-badge status-${event.status}`}>
+                {event.status.charAt(0).toUpperCase() + event.status.slice(1)}
+              </span>
+            </div>
             
 
             {isOwner && (
@@ -160,11 +164,7 @@ export default function Event() {
               </button>
             )}
 
-            <div className="event-status mt-3">
-              <span className={`status-badge status-${event.status}`}>
-                {event.status.charAt(0).toUpperCase() + event.status.slice(1)}
-              </span>
-            </div>
+            
           </div>
         </div>
       </div>

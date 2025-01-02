@@ -39,8 +39,8 @@ function App() {
             <Route path='/forgotpassword' element={<PublicRoute><ForgotPassword/></PublicRoute>}/>
             <Route path='/entercode' element={<PublicRoute><EnterCode/></PublicRoute>}/>
             <Route path='/restpassword' element={<PublicRoute><EnterNewPassword/></PublicRoute>}/>
-            <Route path='/allprojects' element={<ProtectedRoute><AllProjects/></ProtectedRoute>}/>
-            <Route path='/allevents' element={<ProtectedRoute><AllEvents/></ProtectedRoute>}/>
+            <Route path='/allprojects' element={<AllProjects/>}/>
+            <Route path='/allevents' element={<AllEvents/>}/>
             <Route path='/project/:id' element={<ProtectedRoute><Project/></ProtectedRoute>}/>
             <Route path='/event/:id' element={<ProtectedRoute><Event/></ProtectedRoute>}/>
             <Route path='/owner/:id' element={<ProtectedRoute><OwnerProfile/></ProtectedRoute>}/>

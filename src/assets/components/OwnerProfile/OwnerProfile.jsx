@@ -4,7 +4,7 @@ function OwnerProfile() {
     return (
         <div className='owner-profile'>
             
-
+            dsadsad
         </div>
     )
 }

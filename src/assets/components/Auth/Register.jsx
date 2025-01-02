@@ -179,14 +179,13 @@ export default function Register() {
 
               {/* Role Selection */}
               <div className="mb-3">
-                <label className="form-label">Select your role</label>
+                <label className="form-label">Account Type</label>
                 <select
                   className={`form-control ${errors.role ? 'is-invalid' : ''}`}
                   name="role"
                   value={formData.role}
                   onChange={handleChange}
                 >
-                  <option value="">Choose your role</option>
                   <option value="owner">Owner</option>
                   <option value="investor">Investor</option>
                 </select>

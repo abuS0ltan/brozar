@@ -13,11 +13,12 @@ export default function Event() {
   const [selectedImage, setSelectedImage] = useState(0);
   const [registering, setRegistering] = useState(false);
   const [isOwner, setIsOwner] = useState(false);
-  const [participating, setParticipating] = useState(false);
+  const [participationStatus, setParticipationStatus] = useState(null);
 
   useEffect(() => {
     fetchEventDetails();
     checkUserRole();
+    checkParticipationStatus();
   }, [id]);
 
   const fetchEventDetails = async () => {
@@ -42,21 +43,79 @@ export default function Event() {
     }
   };
 
+  const checkParticipationStatus = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/events/${id}/my-participation`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+        }
+      );
+      setParticipationStatus(response.data.status);
+    } catch (err) {
+      // If there's an error, it means the user is not a participant
+      setParticipationStatus(null);
+    }
+  };
+
   const handleRegister = async () => {
     const additionalData = prompt('Would you like to provide additional information? (optional)');
     try {
-      setParticipating(true);
-      await axios.post(`${import.meta.env.VITE_API_URL}/events/${id}/participate`, { additionalData },{ headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } });
+      setRegistering(true);
+      await axios.post(
+        `${import.meta.env.VITE_API_URL}/events/${id}/participate`,
+        { additionalData },
+        { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+      });
+      // Set initial status as pending right after registration
+      setParticipationStatus('pending');
       alert('Successfully participated in the event!');
     } catch (err) {
       alert('Failed to participate in the event. Please try again.');
       console.error('Error participating in event:', err);
     } finally {
-      setParticipating(false);
+      setRegistering(false);
     }
   };
 
-  
+  const getParticipationStatusElement = () => {
+    if (!isOwner && !participationStatus) {
+      return (
+        <button
+          className="btn btn-primary btn-lg register-btn"
+          onClick={handleRegister}
+          disabled={registering}
+        >
+          {registering ? 'Registering...' : 'Share'}
+        </button>
+      );
+    }
+
+    if (isOwner && !participationStatus) {
+      return (
+        <button
+          className="btn btn-success btn-lg register-btn"
+          onClick={handleRegister}
+          disabled={registering}
+        >
+          {registering ? 'Registering...' : 'Register Attendance'}
+        </button>
+      );
+    }
+
+    const statusStyles = {
+      pending: { className: 'text-warning', text: 'Your participation is pending' },
+      accepted: { className: 'text-success', text: 'Your participation has been accepted' },
+      rejected: { className: 'text-danger', text: 'Your participation has been rejected' }
+    };
+
+    const status = statusStyles[participationStatus] || statusStyles.pending;
+    return (
+      <div className={`participation-status ${status.className} fs-5 fw-bold`}>
+        {status.text}
+      </div>
+    );
+  };
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -152,19 +211,8 @@ export default function Event() {
                 {event.status.charAt(0).toUpperCase() + event.status.slice(1)}
               </span>
             </div>
-            
 
-            {isOwner && (
-              <button
-                className="btn btn-success btn-lg register-btn"
-                onClick={handleRegister}
-                disabled={registering}
-              >
-                {registering ? 'Registering...' : 'Register Attendance'}
-              </button>
-            )}
-
-            
+            {getParticipationStatusElement()}
           </div>
         </div>
       </div>

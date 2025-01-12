@@ -46,7 +46,7 @@ export default function OwnerProfile() {
   return (
     <>
     
-        <div className="info mb-5">
+        <div className="info-profile mb-5">
 
             <div className="container ">
                 <div className=" px-5">
